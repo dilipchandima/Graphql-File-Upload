@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
 
 const MUTATION = gql`
@@ -10,7 +10,13 @@ const MUTATION = gql`
 `;
 
 const Home = () => {
-  const [mutate] = useMutation(MUTATION);
+  const [image, setImage] = useState("");
+
+  const [mutate] = useMutation(MUTATION, {
+    onCompleted: ({ singleUpload: { url } }) => {
+      setImage(url);
+    },
+  });
 
   const onChange = ({ target: { validity, files } }) => {
     if (files[0]) mutate({ variables: { file: files[0] } });
@@ -19,7 +25,8 @@ const Home = () => {
   return (
     <header className="App-header">
       <h1>Graphql Photo Upload</h1>
-      <input type="file" required onChange={onChange} />
+      <input type="file" required onChange={onChange} accept="image/*" />
+      {image && <img src={image} alt="Girl in a jacket" width="500" />}
     </header>
   );
 };

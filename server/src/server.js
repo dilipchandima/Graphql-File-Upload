@@ -20,7 +20,7 @@ async function startServer() {
   const app = express();
 
   // This middleware should be added before calling `applyMiddleware`.
-  // app.use(cors());
+  app.use(cors());
   // app.get("/", function (req, res, next) {
   //   res.json({ msg: "This is CORS-enabled for all origins!" });
   // });
