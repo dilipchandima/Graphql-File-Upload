@@ -1,5 +1,5 @@
 const express = require("express");
-const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer } = require("apollo-server-express");
 const graphqlUploadExpress = require("graphql-upload/graphqlUploadExpress.js");
 const typeDefs = require("./schema");
 
@@ -11,7 +11,7 @@ async function startServer() {
     typeDefs,
     resolvers,
     // Using graphql-upload without CSRF prevention is very insecure.
-    // csrfPrevention: true,
+    csrfPrevention: true,
     cache: "bounded",
   });
 

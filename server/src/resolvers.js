@@ -13,7 +13,6 @@ const resolvers = {
   Mutation: {
     singleUpload: async (parent, { file }) => {
       const { createReadStream, filename, mimetype, encoding } = await file;
-      console.log(filename);
 
       // Invoking the `createReadStream` will return a Readable Stream.
       // See https://nodejs.org/api/stream.html#stream_readable_streams

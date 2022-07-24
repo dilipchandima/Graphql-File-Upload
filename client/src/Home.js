@@ -13,6 +13,11 @@ const Home = () => {
   const [image, setImage] = useState("");
 
   const [mutate] = useMutation(MUTATION, {
+    context: {
+      headers: {
+        "apollo-require-preflight": true,
+      },
+    },
     onCompleted: ({ singleUpload: { url } }) => {
       setImage(url);
     },
